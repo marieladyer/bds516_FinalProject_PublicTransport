@@ -14,5 +14,5 @@ navbar:
       href: boston.html
     - text: "NYC"
       href: nyc.html
-     - text: "Chicago"
+    - text: "Chicago"
       href: chicago.html
