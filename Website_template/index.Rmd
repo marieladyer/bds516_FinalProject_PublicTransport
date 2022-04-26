@@ -1,0 +1,8 @@
+---
+title: "BDS 516 - Final Project on Public Transport in Major US Cities"
+---
+
+Mariela Dyer, Ravenn Triplett, Emmanuella Nwabufo teamed together to analyze what people think of public transport systems across major US cities. We created this project as a final capstone for our Data Science and Quantitative Modeling class, under guidance of Professor Alex Shpenev. 
+
+We will be looking at: SEPTA in Philadelphia, MTA in New York City, MBTA in Boston, 
+etc....

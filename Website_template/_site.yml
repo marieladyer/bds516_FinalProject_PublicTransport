@@ -1,0 +1,18 @@
+name: "BDS 516 - Final Project on Public Transport Systems in Major US Cities"
+output_dir: "."
+theme: darkly 
+navbar:
+  title: "BDS 516 - Final Project on Public Transport Systems in Major US Cities"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Philadelphia"
+      href: philadelphia.html
+    - text: "Boston"
+      href: boston.html
+    - text: "NYC"
+      href: nyc.html
+     - text: "Chicago"
+      href: chicago.html
