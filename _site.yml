@@ -4,15 +4,21 @@ theme: darkly
 navbar:
   title: "BDS 516 - Final Project on Public Transport Systems in Major US Cities"
   left:
-    - text: "Home"
-      href: index.html
-    - text: "About"
-      href: about.html
+    - text: "Abstract"
+      href: Abstract.html
+    - text: "Intro"
+      href: Intro.html
+    - text: "Problem Hypothesis"
+      href: Problem.html
+    - text: "Methodology"
+      href: Methodology.html
     - text: "Philadelphia"
       href: philadelphia.html
     - text: "Boston"
       href: boston.html
     - text: "NYC"
       href: nyc.html
-    - text: "Chicago"
-      href: chicago.html
+    - text: "Results"
+      href: results.html
+    - text: "Next Steps"
+      href: results.html
