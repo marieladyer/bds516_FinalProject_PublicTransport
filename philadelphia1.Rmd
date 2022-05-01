@@ -1,19 +1,29 @@
 ---
 title: "philadelphia"
-
 ---
 
+
 ```{r setup, include=FALSE}
-#knitr::opts_chunk$set(echo = TRUE)  #Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 library(reticulate) 
 library(rmarkdown)
+
 
 ```
 
 
 ```{python}
 
+#!pip install pandas 
+#!pip install nltk
+#!pip install sklearn
+#!pip install autocorrect
+#!pip install wordninja
+#!pip install plotly
+#!pip install contractions 
+!pip install requests
+!pip install bs4
+!pip install wordcloud
 
 import pandas as pd
 import re
@@ -43,56 +53,35 @@ from wordcloud import WordCloud
 ```
 
 
-
 ```{python}
 pd.read_csv('philly_septa.csv')
-```
 
-
-```{python}
 nltk.download('averaged_perceptron_tagger')
 nltk.download('wordnet')
 nltk.download('omw-1.4')
 
 df = pd.read_csv('philly_septa.csv')
-```
 
-```{python}
 #save the csv as a new dataframe with named columns
 
 df.columns = ['post_id', 'post_link', 'comments']
 
-df1 = df.rename(columns = {'post_id': 'Reddit Post',
-                            'post_link': 'Post HTML',
-                            'comments': 'Post Comments'})
+
+df.rename(columns = {'post_id': 'Reddit Post',
+                     'post_link': 'Post HTML',
+                      'comments': 'Post Comments'})
                             
-```                            
-   
-   
-```{python} 
 
+                            
 # Remove punctuation
-df1['Post Comments'] = df1['Post Comments'].map(lambda x: re.sub('[,\.!?]', '', x))
+df['comments'].map(lambda x: re.sub('[,\.!?]', '', x))
 
 # Convert the titles to lowercase
-df1['Post Comments'] = df1['Post Comments'].map(lambda x: x.lower())
+df['comments'].map(lambda x: x.lower())
 
 # Print the processed titles of the first rows 
-df1['Post Comments'].head(10)
-```
-   
-```{python}
-# Remove punctuation
-df1['Post Comments'] = df1['Post Comments'].map(lambda x: re.sub('[,\.!?]', '', x))
+df['comments'].head(10)
 
-# Convert the titles to lowercase
-df1['Post Comments'] = df1['Post Comments'].map(lambda x: x.lower())
-
-# Print the processed titles of the first rows 
-df1['Post Comments'].head(10)
-
-```
-```{python}
 
 # nltk.download('stopwords') 
 
@@ -103,7 +92,7 @@ tokens = tokenizer.tokenize('Post Comments')  #make a new column, turn into a ne
 words = [token.lower() for token in tokens]
 # sw = nltk.corpus.stopwords.words('english') + ['septa','philly','transit','time','public','like','transport', 'train', 'bus', 'travel','toward', 'also', 'last','today', 'state', 'nation','national','union','since'] 
 # words_ns = [word for word in words if word not in sw]  #why do we need word for word in words?
-# comment_words_ns = [word for word in df1 if word not in sw]
+# comment_words_ns = [word for word in df if word not in sw]
 # posttokens.append(words_ns)
 
 
@@ -153,32 +142,36 @@ def remove_stops(word_list):
     return removed_list
 
 
-df['PostComments2'] = df1['Post Comments'].apply(lambda x: ' '.join([item for item in x.split() if item not in manual_stops]))
+df['PostComments2'] = df['comments'].apply(lambda x: ' '.join([item for item in x.split() if item not in manual_stops]))
 
-#print([all_stops][0:20]) Error!
-``` 
+```
 
 
 ```{python}
 #this step is to make sure you remove all the stopwords in list.
 #add this back to hw 7. 
+df
 tokenizer = nltk.tokenize.RegexpTokenizer('\w+')
 sw = nltk.corpus.stopwords.words('english') + manual_stops
 tokenized = []
 
 
 for post in df['PostComments2']:
-  tokens = tokenizer.tokenize(post)
-  words = [token.lower() for token in tokens]
-  words_ns = [word for word in words if word not in sw]
+    tokens = tokenizer.tokenize(post)
+    words = [token.lower() for token in tokens]
+    words_ns = [word for word in words if word not in sw]
     # you can add lemmatizing or stemmatizing here
-  words_res = " ".join(words_ns)
-  tokenized.append(words_res)
+    words_res = " ".join(words_ns)
+    tokenized.append(words_res)
 
-  df['processed'] = pd.DataFrame(tokenized)
-``` 
+df['processed'] = pd.DataFrame(tokenized)
 
-```{python}
+
+# tokens = []
+# word_tokenize(comment_words_ns)
+
+comment_words_ns
+
 # Join the different processed comments together.
 long_string = ' '.join(df['PostComments2'])
 
@@ -190,10 +183,8 @@ wordcloud.generate(long_string)
 
 # Visualize the word cloud
 wordcloud.to_image()
-```
 
 
-```{python}
 # Load the library with the CountVectorizer method
 from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
@@ -227,4 +218,5 @@ count_data = count_vectorizer.fit_transform(df['PostComments2'])
 
 # Visualise the 10 most common words
 plot_10_most_common_words(count_data, count_vectorizer)
-``` 
+```
+
